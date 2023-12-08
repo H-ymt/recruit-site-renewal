@@ -1,0 +1,17 @@
+---
+
+---
+
+<div class="container">
+  <slot />
+</div>
+
+<style lang="scss">
+  .container {
+    padding: 1rem;
+
+    @include mq(lg) {
+      padding: 2rem;
+    }
+  }
+</style>

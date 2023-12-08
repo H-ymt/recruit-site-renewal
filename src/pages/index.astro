@@ -1,11 +1,47 @@
 ---
+import Container from "../components/Container.astro";
 import Layout from "../layouts/Layout.astro";
+import type { Article } from "../lib/newt";
+import { newtClient } from "../lib/newt";
+
+const { items: articles } = await newtClient.getContents<Article>({
+  appUid: "blog",
+  modelUid: "article",
+  query: {
+    select: ["title", "slug", "body"],
+  },
+});
 ---
 
-<Layout title="Recruit Site">
-  <main>
+<Layout title="Recruit Site" description="Recruit site with Astro and Newt">
+  <Container>
     <h1>Recruit Site</h1>
-  </main>
+
+    <section class="staff">
+      <h2>STAFF INTERVIEW</h2>
+
+      <ul>
+        {
+          articles.map((article) => {
+            return (
+              <li>
+                <a href={`/articles/${article.slug}`}>{article.title}</a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+  </Container>
 </Layout>
 
-<style></style>
+<style lang="scss">
+  .staffListImage {
+    width: min(200px, 100%);
+    border-radius: 12px;
+  }
+
+  .staffListExcerpt {
+    color: hsl(var(--muted-foreground));
+  }
+</style>
