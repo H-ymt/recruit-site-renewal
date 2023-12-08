@@ -4,6 +4,10 @@ export interface Article {
   title: string;
   slug: string;
   body: string;
+  coverImage: {
+    src: string;
+  };
+  tags: [];
 }
 
 export const newtClient = createClient({

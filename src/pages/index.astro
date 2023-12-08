@@ -8,7 +8,7 @@ const { items: articles } = await newtClient.getContents<Article>({
   appUid: "blog",
   modelUid: "article",
   query: {
-    select: ["title", "slug", "body"],
+    select: ["title", "slug", "body", "coverImage", "tags"],
   },
 });
 ---
@@ -25,6 +25,7 @@ const { items: articles } = await newtClient.getContents<Article>({
           articles.map((article) => {
             return (
               <li>
+                <img src={article.coverImage.src} alt="" />
                 <a href={`/articles/${article.slug}`}>{article.title}</a>
               </li>
             );
