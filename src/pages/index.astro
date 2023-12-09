@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Container from "../components/Container.astro";
 import Layout from "../layouts/Layout.astro";
 import type { Article } from "../lib/newt";
@@ -8,7 +9,7 @@ const { items: articles } = await newtClient.getContents<Article>({
   appUid: "blog",
   modelUid: "article",
   query: {
-    select: ["title", "slug", "body", "coverImage", "tags"],
+    select: ["title", "excerpt", "slug", "body", "coverImage"],
   },
 });
 ---
@@ -20,13 +21,22 @@ const { items: articles } = await newtClient.getContents<Article>({
     <section class="staff">
       <h2>STAFF INTERVIEW</h2>
 
-      <ul>
+      <ul class="staffList">
         {
           articles.map((article) => {
             return (
-              <li>
-                <img src={article.coverImage.src} alt="" />
-                <a href={`/articles/${article.slug}`}>{article.title}</a>
+              <li class="staffListItem">
+                <a class="staffListLink" href={`/articles/${article.slug}`}>
+                  <Image
+                    src={article.coverImage.src}
+                    alt="thumbnail"
+                    width="288"
+                    height="288"
+                    class="staffImage"
+                  />
+                  <p class="staffTitle">{article.title}</p>
+                </a>
+                <div class="staffExcerpt" set:html={article.excerpt} />
               </li>
             );
           })
@@ -42,7 +52,45 @@ const { items: articles } = await newtClient.getContents<Article>({
     border-radius: 12px;
   }
 
-  .staffListExcerpt {
+  .staffList {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    padding: 30px 0;
+  }
+
+  .staffListItem {
+    padding: 16px;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+
+  .staffListLink {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .staffImage {
+    width: min(220px, 100%);
+  }
+
+  .staffTitle {
+    display: -webkit-box;
+    font-weight: 600;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .staffExcerpt {
+    display: -webkit-box;
+    margin-top: 16px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
     color: hsl(var(--muted-foreground));
   }
 </style>
