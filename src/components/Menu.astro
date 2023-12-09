@@ -1,0 +1,56 @@
+---
+const navItems = [
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "About",
+    path: "/about",
+  },
+  {
+    name: "Staff",
+    path: "/staff",
+  },
+  {
+    name: "Job",
+    path: "/job",
+  },
+  {
+    name: "Contact",
+    path: "/contact",
+  },
+];
+
+const active = Astro.url.pathname;
+---
+
+<nav>
+  <ul class="list">
+    {
+      navItems.map(({ name, path }) => (
+        <li class="listItem">
+          <a href={path} class={active === path ? "active" : ""}>
+            {name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style lang="scss">
+  .list {
+    display: flex;
+    gap: 16px;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .listItem {
+    font-weight: 400;
+  }
+
+  .listItem .active {
+    color: hsl((var(--foreground)));
+  }
+</style>

@@ -1,0 +1,22 @@
+---
+import Menu from "./Menu.astro";
+---
+
+<header class="header">
+  <div class="headerInner">
+    <a href="/">Logo</a>
+    <Menu />
+  </div>
+</header>
+
+<style lang="scss">
+  .header {
+    padding: 20px 24px;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .headerInner {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
