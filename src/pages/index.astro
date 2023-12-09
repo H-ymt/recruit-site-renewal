@@ -49,7 +49,6 @@ const { items: articles } = await newtClient.getContents<Article>({
 <style lang="scss">
   .staffListImage {
     width: min(200px, 100%);
-    border-radius: 12px;
   }
 
   .staffList {
@@ -60,6 +59,10 @@ const { items: articles } = await newtClient.getContents<Article>({
   }
 
   .staffListItem {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+    gap: 16px;
     padding: 16px;
     border: 1px solid hsl(var(--border));
     border-radius: var(--radius);
@@ -70,11 +73,13 @@ const { items: articles } = await newtClient.getContents<Article>({
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 24px;
   }
 
   .staffImage {
     width: min(220px, 100%);
+    aspect-ratio: 2/1.8;
+    object-fit: cover;
   }
 
   .staffTitle {
@@ -87,7 +92,6 @@ const { items: articles } = await newtClient.getContents<Article>({
 
   .staffExcerpt {
     display: -webkit-box;
-    margin-top: 16px;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
