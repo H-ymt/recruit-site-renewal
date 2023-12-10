@@ -25,7 +25,7 @@ const navItems = [
 const active = Astro.url.pathname;
 ---
 
-<nav>
+<nav class="menu">
   <ul class="list">
     {
       navItems.map(({ name, path }) => (
@@ -40,6 +40,14 @@ const active = Astro.url.pathname;
 </nav>
 
 <style lang="scss">
+  .menu {
+    display: none;
+
+    @include mq(lg) {
+      display: block;
+    }
+  }
+
   .list {
     display: flex;
     gap: 16px;
