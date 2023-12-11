@@ -9,5 +9,9 @@
         "extraFileExtensions": [".astro"]
       }
     }
-  ]
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2015
+  }
 }
