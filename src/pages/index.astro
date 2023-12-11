@@ -1,5 +1,9 @@
 ---
+import { Icon } from "astro-icon";
 import { Image } from "astro:assets";
+import heroImage1 from "../assets/pexels-marc-mueller-380768.jpg";
+import heroImage3 from "../assets/pexels-pixabay-260931.jpg";
+import heroImage2 from "../assets/pexels-pixabay-37347.jpg";
 import Container from "../components/Container.astro";
 import Layout from "../layouts/Layout.astro";
 import type { Article } from "../lib/newt";
@@ -15,7 +19,52 @@ const { items: articles } = await newtClient.getContents<Article>({
 ---
 
 <Layout title="Recruit Site" description="Recruit site with Astro and Newt">
+  <div class="hero">
+    <Image
+      class="heroImage"
+      src={heroImage1}
+      width={1920}
+      height={1080}
+      alt="heroImage"
+    />
+    <Image
+      class="heroImage"
+      src={heroImage2}
+      width={1920}
+      height={1080}
+      alt="heroImage"
+    />
+    <Image
+      class="heroImage"
+      src={heroImage3}
+      width={1920}
+      height={1080}
+      alt="heroImage"
+    />
+    <p class="heroMessage">
+      感動させたい想いがある。<br />喜ばせたい人がいる。
+    </p>
+    <div class="heroArrow">
+      <div class="heroArrowInner">
+        <span>
+          ワクワクが<br />いっぱい
+        </span>
+        <Icon class="heroArrowIcon" name="carbon:chevron-down" />
+      </div>
+    </div>
+  </div>
+
   <Container>
+    <div>
+      <p>人をもっと笑顔に「ワクワク」を想いにする会社</p>
+      <p>
+        ひとりひとりが丁寧で完成度の高いアートワークを心がけ「人を笑顔にする仕事」をし続けていきたいと考えています。
+        チーム全体が根本的課題の解決をミッションと捉え、見た目のキレイさだけではなく、クリエイター視点での固定観念を排除し、
+        クライアントのコンテクストをよく理解し様々な角度からアプローチすることで新しいコンテンツを創造し続けていきます。
+        常に明るく前向きに、素直な心を持って仕事に打ち込めるスペシャリスト集団を私たちは目指しています。
+      </p>
+    </div>
+
     <h1>Recruit Site</h1>
 
     <section class="staff">
@@ -35,8 +84,8 @@ const { items: articles } = await newtClient.getContents<Article>({
                     class="staffImage"
                   />
                   <p class="staffTitle">{article.title}</p>
+                  <div class="staffExcerpt" set:html={article.excerpt} />
                 </a>
-                <div class="staffExcerpt" set:html={article.excerpt} />
               </li>
             );
           })
@@ -47,8 +96,108 @@ const { items: articles } = await newtClient.getContents<Article>({
 </Layout>
 
 <style lang="scss">
-  .staffListImage {
-    width: min(200px, 100%);
+  .hero {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-size: cover;
+  }
+
+  .heroImage {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: calc(100vh - var(--header-height));
+    animation: changeImage 12s infinite;
+    opacity: 0;
+    object-fit: cover;
+  }
+
+  @keyframes changeImage {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    33% {
+      opacity: 1;
+    }
+    63% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .heroImage:nth-of-type(1) {
+    animation-delay: 0s;
+  }
+
+  .heroImage:nth-of-type(2) {
+    animation-delay: 4s;
+  }
+
+  .heroImage:nth-of-type(3) {
+    animation-delay: 8s;
+  }
+
+  .heroMessage {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: hsl(var(--background));
+    text-shadow: 2px 2px 2px hsl(var(--muted-foreground));
+
+    @include mq(lg) {
+      font-size: 36px;
+    }
+  }
+
+  .heroArrow {
+    position: absolute;
+    bottom: 32px;
+    font-size: 16px;
+    text-align: center;
+    color: hsl(var(--primary));
+    animation: floating-y 1.4s ease-in-out infinite alternate-reverse;
+    background: #ffff;
+    border: none;
+    box-shadow: 0 0 4px hsl(var(--muted));
+    border-radius: 50%;
+  }
+
+  .heroArrowInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    font-weight: 400;
+  }
+
+  .heroArrowIcon {
+    position: absolute;
+    bottom: 16px;
+    width: 24px;
+    height: 24px;
+  }
+
+  @keyframes floating-y {
+    0% {
+      transform: translateY(-10%);
+    }
+    100% {
+      transform: translateY(10%);
+    }
   }
 
   .staffList {
@@ -61,7 +210,7 @@ const { items: articles } = await newtClient.getContents<Article>({
   .staffListItem {
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: span 2;
+    grid-row: span 1;
     gap: 16px;
     padding: 16px;
     border: 1px solid hsl(var(--border));
@@ -73,20 +222,21 @@ const { items: articles } = await newtClient.getContents<Article>({
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 20px;
   }
 
   .staffImage {
-    width: min(220px, 100%);
-    aspect-ratio: 2/1.8;
+    width: min(100px, 100%);
+    aspect-ratio: 2/1.6;
     object-fit: cover;
   }
 
   .staffTitle {
     display: -webkit-box;
+    text-align: center;
     font-weight: 600;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     overflow: hidden;
   }
 
