@@ -58,17 +58,16 @@ const { items: articles } = await newtClient.getContents<Article>({
   </div>
 
   <Container>
-    <div>
-      <p>人をもっと笑顔に「ワクワク」を想いにする会社</p>
+    <div class="head homeContainer">
+      <h1 class="headTitle">人をもっと笑顔に「ワクワク」を想いにする会社</h1>
       <p>
-        ひとりひとりが丁寧で完成度の高いアートワークを心がけ「人を笑顔にする仕事」をし続けていきたいと考えています。
-        チーム全体が根本的課題の解決をミッションと捉え、見た目のキレイさだけではなく、クリエイター視点での固定観念を排除し、
-        クライアントのコンテクストをよく理解し様々な角度からアプローチすることで新しいコンテンツを創造し続けていきます。
-        常に明るく前向きに、素直な心を持って仕事に打ち込めるスペシャリスト集団を私たちは目指しています。
+        ひとりひとりが丁寧で完成度の高いアートワークを心がけ「人を笑顔にする仕事」をし続けていきたいと考えています。<br
+        />
+         チーム全体が根本的課題の解決をミッションと捉え、見た目のキレイさだけではなく、クリエイター視点での固定観念を排除し、クライアントのコンテクストをよく理解し様々な角度からアプローチすることで新しいコンテンツを創造し続けていきます。<br
+        />
+         常に明るく前向きに、素直な心を持って仕事に打ち込めるスペシャリスト集団を私たちは目指しています。
       </p>
     </div>
-
-    <h1>Recruit Site</h1>
 
     <section class="staff">
       <h2>STAFF INTERVIEW</h2>
@@ -156,7 +155,7 @@ const { items: articles } = await newtClient.getContents<Article>({
     font-size: 28px;
     font-weight: 700;
     color: hsl(var(--background));
-    text-shadow: 2px 2px 2px hsl(var(--muted-foreground));
+    text-shadow: 2px 2px 1px hsl(var(--foreground));
 
     @include mq(lg) {
       font-size: 36px;
@@ -172,7 +171,7 @@ const { items: articles } = await newtClient.getContents<Article>({
     animation: floating-y 1.4s ease-in-out infinite alternate-reverse;
     background: #ffff;
     border: none;
-    box-shadow: 0 0 4px hsl(var(--muted));
+    box-shadow: 1px 1px 2px hsl(var(--muted));
     border-radius: 50%;
   }
 
@@ -201,6 +200,28 @@ const { items: articles } = await newtClient.getContents<Article>({
     100% {
       transform: translateY(10%);
     }
+  }
+
+  .homeContainer {
+    padding: 48px 0;
+
+    @include mq(lg) {
+      padding: 72px 0;
+    }
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include mq(lg) {
+      text-align: center;
+    }
+  }
+
+  .staffTitle {
+    color: hsl(var(--foreground));
   }
 
   .staffList {

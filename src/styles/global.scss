@@ -42,11 +42,19 @@ body {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 32px;
+
+  @include mq(lg) {
+    font-size: 40px;
+  }
 }
 
 h2 {
   font-size: 26px;
+
+  @include mq(lg) {
+    font-size: 32px;
+  }
 }
 
 li {
@@ -62,4 +70,8 @@ a:visited {
 img {
   max-width: 100%;
   height: auto;
+}
+
+p {
+  color: hsl(var(--muted-foreground));
 }
