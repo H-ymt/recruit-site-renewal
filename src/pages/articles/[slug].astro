@@ -21,9 +21,9 @@ export const getStaticPaths = async () => {
 const { article } = Astro.props;
 ---
 
-<Layout title="詳細ページ">
+<Layout title="詳細ページ" description="スタッフ紹介ページです">
   <main>
-    <h2>{article.title}</h2>
+    <h1>{article.title}</h1>
     <article set:html={article.body} />
     <!-- <img src={article.coverImage.src} alt="" /> -->
   </main>

@@ -59,7 +59,9 @@ const { items: articles } = await newtClient.getContents<Article>({
 
   <Container>
     <div class="head homeContainer">
-      <h1 class="headTitle">人をもっと笑顔に「ワクワク」を想いにする会社</h1>
+      <h1 class="headTitle">
+        人をもっと笑顔に<span>「ワクワク」を想いにする会社</span>
+      </h1>
       <p>
         ひとりひとりが丁寧で完成度の高いアートワークを心がけ「人を笑顔にする仕事」をし続けていきたいと考えています。<br
         />
@@ -69,31 +71,33 @@ const { items: articles } = await newtClient.getContents<Article>({
       </p>
     </div>
 
-    <section class="staff">
-      <h2>STAFF INTERVIEW</h2>
+    <div class="homeContainer">
+      <section class="staff">
+        <h2>STAFF INTERVIEW</h2>
 
-      <ul class="staffList">
-        {
-          articles.map((article) => {
-            return (
-              <li class="staffListItem">
-                <a class="staffListLink" href={`/articles/${article.slug}`}>
-                  <Image
-                    src={article.coverImage.src}
-                    alt="thumbnail"
-                    width="288"
-                    height="288"
-                    class="staffImage"
-                  />
-                  <p class="staffTitle">{article.title}</p>
-                  <div class="staffExcerpt" set:html={article.excerpt} />
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </section>
+        <ul class="staffList">
+          {
+            articles.map((article) => {
+              return (
+                <li class="staffListItem">
+                  <a class="staffListLink" href={`/articles/${article.slug}`}>
+                    <Image
+                      src={article.coverImage.src}
+                      alt="thumbnail"
+                      width="288"
+                      height="288"
+                      class="staffImage"
+                    />
+                    <p class="staffTitle">{article.title}</p>
+                    <div class="staffExcerpt" set:html={article.excerpt} />
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+    </div>
   </Container>
 </Layout>
 
@@ -218,6 +222,10 @@ const { items: articles } = await newtClient.getContents<Article>({
     @include mq(lg) {
       text-align: center;
     }
+  }
+
+  .headTitle span {
+    display: inline-block;
   }
 
   .staffTitle {
